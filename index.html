@@ -1,1 +1,70 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body { background: #121211; color: white; font-family: sans-serif; text-align: center; padding: 16px; }
+  h1 { color: #f5b82e; margin-bottom: 4px; }
+  .classes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 16px 0; }
+  .matieres { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 16px 0; }
+  button { background: #222220; color: white; border: none; border-radius: 12px; padding: 16px 6px; font-size: 17px; }
+  .actif { background: #f5b82e; color: #1b1403; font-weight: bold; }
+  #resultat { color: #f5b82e; font-size: 20px; min-height: 30px; }
+  .contact { margin-top: 30px; color: #a9a69d; }
+  .wa { display: inline-block; margin-top: 12px; background: #2f9e5b; color: white; text-decoration: none; border-radius: 999px; padding: 14px 24px; font-weight: bold; }
+</style>
 
+<h1>DARK VIBEZ</h1>
+<p>ÉDUCATION 📚</p>
+<p>Bienvenue sur DARK VIBEZ !</p>
+<p>Créé par Lee créateur</p>
+
+<div class="classes" id="classes"></div>
+<div class="matieres" id="matieres"></div>
+<p id="resultat">Choisis une matière</p>
+
+<div class="contact">Pour plus d'options, contacter Lee créateur<br><b>44 72 20 81</b><br><a class="wa" href="https://wa.me/22644722081">Écrire sur WhatsApp</a></div>
+
+<script>
+  var classes = ['6ème', '5ème', '4ème', '3ème', '2nde', '1ère', 'Tle'];
+
+  var college = ['Français 📖', 'Mathématiques 📐', 'Anglais 🇬🇧', 'SVT 🌱', 'Histoire-Géo 🌍', 'EPS ⚽', 'ECM 🤝'];
+  var college2 = ['Français 📖', 'Mathématiques 📐', 'Anglais 🇬🇧', 'Allemand 🇩🇪', 'Espagnol 🇪🇸', 'SVT 🌱', 'PC ⚗️', 'Histoire-Géo 🌍', 'EPS ⚽', 'ECM 🤝'];
+  var lycee = ['Français 📖', 'Mathématiques 📐', 'Anglais 🇬🇧', 'Allemand 🇩🇪', 'Espagnol 🇪🇸', 'SVT 🌱', 'PC ⚗️', 'Histoire-Géo 🌍', 'EPS ⚽'];  var premiere = ['Français 📖', 'Philosophie 🧠', 'Mathématiques 📐', 'Anglais 🇬🇧', 'Allemand 🇩🇪', 'Espagnol 🇪🇸', 'SVT 🌱', 'PC ⚗️', 'Histoire-Géo 🌍', 'EPS ⚽'];
+  var terminale = ['Philosophie 🧠', 'Mathématiques 📐', 'Anglais 🇬🇧', 'Allemand 🇩🇪', 'Espagnol 🇪🇸', 'SVT 🌱', 'PC ⚗️', 'Histoire-Géo 🌍', 'EPS ⚽', 'Économie 💰'];
+
+  var parClasse = [college, college.concat(['PC ⚗️']), college2, college2, lycee, premiere, terminale];
+  var fin = ['Exercices ✍️', 'Exercices corrigés ✅'];
+
+  var niveau = 3;
+
+  function afficherClasses() {
+    var html = '';
+    for (var i = 0; i < classes.length; i++) {
+      var actif = (i === niveau) ? 'actif' : '';
+      html += '<button class="' + actif + '" onclick="changerClasse(' + i + ')">' + classes[i] + '</button>';
+    }
+    document.getElementById('classes').innerHTML = html;
+  }
+
+  function afficherMatieres() {
+    var liste = parClasse[niveau].concat(fin);
+    var html = '';
+    for (var j = 0; j < liste.length; j++) {
+      html += '<button onclick="choisir(' + j + ')">' + liste[j] + '</button>';
+    }
+    document.getElementById('matieres').innerHTML = html;
+  }
+
+  function changerClasse(i) {
+    niveau = i;
+    document.getElementById('resultat').textContent = 'Choisis une matière';
+    afficherClasses();
+    afficherMatieres();
+  }
+
+  function choisir(j) {
+    var liste = parClasse[niveau].concat(fin);
+    document.getElementById('resultat').textContent = liste[j] + ' (' + classes[niveau] + ')';
+  }
+
+  afficherClasses();
+  afficherMatieres();
+</script>
